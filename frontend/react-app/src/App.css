@@ -1,0 +1,1492 @@
+/* --- GLOBAL RESET & FONTS --- */
+:root {
+  --bg-dark-green: #004d26; /* Warna Background Luar */
+  --header-green: #6c9b46; /* Warna Header di Chat Card sesuai gambar */
+  --btn-green: #2e7d32;
+  --chat-bg: #ffffff;
+  --bubble-grey: #cfd8dc; /* Bubble kiri */
+  --bubble-user: #c8e6c9; /* Bubble kanan */
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* Background Hijau Gelap satu layar penuh */
+  background: radial-gradient(circle at center, #006837 0%, #002e18 100%);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+}
+
+/* --- WRAPPER UTAMA (Agar Card ada di tengah) --- */
+.app-wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Container Daun - Pastikan di belakang konten utama */
+.leaf-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* PENTING: Agar klik tembus ke tombol di bawahnya */
+  z-index: 0; /* Layer paling bawah */
+  overflow: hidden;
+}
+
+/* Style Tiap Daun */
+.leaf {
+  position: absolute;
+  top: -50px; /* Mulai dari atas layar */
+  animation: fall linear infinite;
+}
+
+/* Pastikan elemen penting ada di atas daun */
+.chat-card,
+.login-card,
+.settings-btn,
+.global-logout {
+  z-index: 10; /* Layer di atas daun */
+  position: relative;
+}
+
+.global-logout:hover {
+  transform: translateY(-1px);
+  background-color: #f0f0f0;
+}
+
+/* Animasi Jatuh & Goyang */
+@keyframes fall {
+  0% {
+    top: -10%;
+    transform: translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  50% {
+    transform: translateX(50px) rotate(180deg); /* Goyang ke kanan */
+  }
+  100% {
+    top: 110%; /* Sampai bawah layar */
+    transform: translateX(-50px) rotate(360deg); /* Goyang ke kiri */
+    opacity: 0;
+  }
+}
+
+/* TOMBOL LOGOUT GLOBAL (Pojok Kanan Atas) */
+.global-logout {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+}
+
+.settings-btn {
+  position: absolute;
+  top: 20px;
+  right: 130px; /* Sebelah logout */
+  color: white;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* --- LOGIN CARD DESIGN --- */
+.login-card {
+  width: 900px;
+  height: 550px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+}
+
+/* BAGIAN KIRI KARTU LOGIN */
+.login-left {
+  flex: 1;
+  /* background: linear-gradient(160deg, #1b5e20 0%, #004d26 100%); */
+  background-image: url(../public/STUDIO.jpg);
+  background-size: 100%;
+  position: relative;
+  padding: 50px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Efek noise/tekstur gambar (opsional) */
+.login-left::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+");
+  opacity: 0.3;
+}
+
+.login-left h2 {
+  font-size: 1.5rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.login-left h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin: 0;
+}
+
+.login-social {
+  position: absolute;
+  bottom: 30px;
+  left: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+/* BAGIAN KANAN KARTU LOGIN (FORM) */
+.login-right {
+  flex: 1;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.login-logo img {
+  width: 60px;
+  margin-bottom: 10px;
+}
+.login-logo h3 {
+  color: #2e7d32;
+  margin: 0;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+.login-logo p {
+  color: #888;
+  margin: 0;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+}
+
+.login-form {
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.input-group label {
+  display: block;
+  font-size: 0.85rem;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #f9f9f9;
+  outline: none;
+  font-size: 0.9rem;
+}
+.input-wrapper input:focus {
+  background: #fff;
+  border-color: #2e7d32;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  color: #333;
+}
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  cursor: pointer;
+}
+
+.forgot-pass {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  color: #555;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  border: none;
+  border-radius: 6px;
+  background: linear-gradient(to bottom, #43a047, #2e7d32);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+.btn-login:hover {
+  filter: brightness(1.1);
+}
+
+.login-footer {
+  margin-top: 20px;
+  font-size: 0.85rem;
+}
+.login-footer span {
+  font-weight: bold;
+  cursor: pointer;
+  color: #000;
+}
+
+/* --- CHAT CARD DESIGN --- */
+.chat-card {
+  width: 900px;
+  height: 85vh; /* Tinggi card chat */
+  background: #fff;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+/* HEADER DI DALAM CARD */
+.chat-header-card {
+  /* background-color: #558b2f; */
+  /* background: linear-gradient(90deg, #6c9b46 0%, #558b2f 100%); */
+  background: linear-gradient(
+    90deg,
+    rgba(132, 204, 94, 1) -5%,
+    rgba(37, 107, 0, 1) 100%
+  );
+  padding: 15px 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  height: 80px;
+  justify-content: flex-start;
+}
+
+.chat-header-logo img {
+  height: 50px; /* Logo besar sesuai gambar */
+  width: auto;
+}
+
+.chat-header-text h1 {
+  color: #004d26; /* Text MEDIVORA Hijau Tua */
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+.chat-header-text p {
+  color: #004d26;
+  margin: 0;
+  font-size: 0.6rem;
+  letter-spacing: 2px;
+  opacity: 0.8;
+}
+
+/* --- INDIKATOR ONLINE (BARU) --- */
+.online-badge {
+  /* margin-left: auto akan mendorong elemen ini mentok ke kanan */
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #e8f5e9; /* Hijau muda halus */
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 1px solid #c8e6c9;
+}
+
+.online-badge span {
+  font-size: 12px;
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* Lingkaran Hijau */
+.blinking-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #2ecc71; /* Hijau menyala */
+  border-radius: 50%;
+  /* Panggil animasi 'pulse' */
+  animation: pulse 1.5s infinite;
+  box-shadow: 0 0 0 rgba(46, 204, 113, 0.4);
+}
+
+/* Animasi Kedip-Kedip */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 4px rgba(46, 204, 113, 0);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+    opacity: 1;
+  }
+}
+
+/* CHAT AREA */
+.chat-messages {
+  flex: 1;
+  padding: 30px;
+  overflow-y: auto;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.message {
+  max-width: 60%;
+  padding: 15px 20px;
+  border-radius: 15px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* System Bubble (Kanan, Abu-abu kehijauan sesuai gambar) */
+.message.system {
+  align-self: flex-start;
+  background-color: #bcaaa4; /* Warna agak kecoklatan/abu seperti gambar */
+  background-color: #cfd8dc; /* Revisi: Abu-abu terang */
+  border-top-left-radius: 2px;
+  color: #333;
+  text-align: left;
+  font-family: inter;
+}
+
+/* User Bubble (Kiri, Abu-abu gelap sesuai gambar) */
+.message.user {
+  align-self: flex-end;
+  background-color: #b0bec5; /* Abu-abu lebih gelap */
+  border-top-right-radius: 2px;
+  color: #333;
+  text-align: left;
+}
+
+.message.user {
+  background-color: #c8e6c9; /* Hijau pucat */
+  background-color: #b6cbb5; /* Hijau grayish sesuai gambar */
+  text-align: left;
+  font-family: inter;
+}
+.message.system {
+  background-color: #b6cbb5; /* Sama */
+}
+
+.msg-time {
+  display: block;
+  text-align: right;
+  font-size: 0.75rem;
+  margin-top: 5px;
+  color: #555;
+}
+
+/* --- FITUR BUTTON AKSI (Copy & Delete) --- */
+
+/* Wrapper untuk Bubble + Tombol */
+.message-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  max-width: 70%;
+}
+
+/* User (Kanan) */
+.message-wrapper.user {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+/* System/AI (Kiri) */
+.message-wrapper.system {
+  align-self: flex-start;
+  align-items: flex-start;
+}
+
+/* Grouping agar tombol aksi nempel di samping bubble */
+.message-content-group {
+  display: flex;
+  align-items: center; /* Sejajar secara vertikal */
+  gap: 8px; /* Jarak antara bubble dan tombol */
+}
+
+/* KHUSUS USER: Balik urutan flex agar tombol ada di KIRI Bubble */
+.message-wrapper.user .message-content-group {
+  flex-direction: row-reverse;
+}
+
+/* Style Tombol Aksi Container */
+.message-actions {
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+  display: flex;
+  gap: 5px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 4px;
+  border-radius: 8px;
+}
+
+/* MUNCULKAN TOMBOL SAAT HOVER PESAN */
+.message-wrapper:hover .message-actions {
+  opacity: 1; /* Muncul saat disentuh */
+}
+
+/* Style Button (Icon) */
+.message-actions button {
+  background: none;
+  border: none;
+  font-size: 1.1rem; /* Ukuran icon */
+  cursor: pointer;
+  opacity: 0.6;
+  padding: 2px;
+  transition: transform 0.2s;
+}
+
+.message-actions button:hover {
+  opacity: 1;
+  transform: scale(1.2); /* Efek membesar dikit saat diklik */
+  color: #2e7d32; /* Warna hijau saat hover */
+}
+
+/* INPUT AREA (Tanpa border, floating look) */
+.chat-input-area {
+  padding: 20px;
+  background: white;
+}
+/* Input disembunyikan logikanya di App.jsx, tapi stylenya di sini jika perlu */
+
+/* =========================================
+  🎨 DASHBOARD CONTRIBUTOR STYLES
+   ========================================= */
+
+/* 1. LAYOUT & BACKGROUND HIJAU */
+.contributor-layout {
+  min-height: 100vh;
+  /* Background Hijau Tua (Sama dengan Admin/Login) */
+  background-color: #006837;
+  background: radial-gradient(circle at center, #007a4d 0%, #004d26 100%);
+  padding-bottom: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. HEADER */
+.contributor-header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.contributor-header h1 {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 1px;
+}
+/* Menggunakan ulang .btn-logout-white dari CSS Admin */
+
+/* 3. CONTENT CONTAINER */
+.contributor-content {
+  max-width: 800px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* 4. CARD DESIGN (KOTAK PUTIH) */
+.contributor-card {
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.card-heading {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 25px;
+}
+
+/* 5. FORM UPLOAD */
+.upload-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
+.input-row {
+  width: 100%;
+}
+
+/* Input Teks (Rounded Border) */
+.contrib-text-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #000; /* Border hitam tipis sesuai gambar */
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* Input File (Custom Style) */
+.contrib-file-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 25px; /* Lebih rounded seperti pill */
+  background-color: #fff;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+/* Hack sedikit untuk styling input file native agar mirip gambar */
+.contrib-file-input::file-selector-button {
+  border: 1px solid #333;
+  padding: 5px 15px;
+  border-radius: 15px;
+  background-color: #ddd; /* Abu-abu tombol choose file */
+  margin-right: 15px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Tombol Upload (Biru) */
+.btn-upload-blue {
+  background-color: #0047ab; /* Biru Tua sesuai gambar */
+  color: white;
+  border: none;
+  padding: 10px 50px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 71, 171, 0.3);
+  transition: transform 0.1s;
+}
+.btn-upload-blue:active {
+  transform: scale(0.98);
+}
+
+/* 6. TABEL RIWAYAT */
+
+/* Header Tabel (Pill Shape Abu-abu) */
+.history-header-row {
+  display: flex;
+  justify-content: space-between;
+  background-color: #d1d1d1; /* Abu-abu */
+  border-radius: 20px;
+  padding: 8px 30px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.history-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #000;
+  border-radius: 15px;
+  padding: 15px 20px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.history-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.history-body::-webkit-scrollbar-thumb {
+  background: #888; /* Abu-abu */
+  border-radius: 4px;
+}
+
+/* Warna batang saat di-hover */
+.history-body::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Abu-abu lebih gelap */
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #eee;
+}
+.history-row:last-child {
+  border-bottom: none;
+}
+
+.h-col.left {
+  flex: 1;
+  text-align: left;
+}
+.h-col.right {
+  flex: 1;
+  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+.title-text {
+  font-size: 1rem;
+  color: #000;
+}
+.status-text {
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Status Dot (Bulatan Warna) */
+.status-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.status-dot.approved {
+  background-color: #66cc33; /* Hijau Terang */
+}
+.status-dot.rejected {
+  background-color: #ff3333; /* Merah */
+}
+.status-dot.pending {
+  background-color: #ffcc00; /* Kuning */
+}
+
+.empty-history {
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  padding: 10px;
+}
+
+/* =========================================
+   🎨 DASHBOARD ADMIN STYLES (FULL REVISION)
+   ========================================= */
+
+/* 1. LAYOUT BACKGROUND HIJAU */
+.admin-layout {
+  min-height: 100vh;
+  /* Background Hijau Tua sesuai gambar */
+  background-color: #006837;
+  background: radial-gradient(circle at center, #007a4d 0%, #004d26 100%);
+  padding-bottom: 50px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* 2. HEADER */
+.admin-header-bar {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-header-bar h1 {
+  color: white;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.btn-logout-white {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+}
+.btn-logout-white:hover {
+  background-color: #f0f0f0;
+  transform: translateY(-1px);
+}
+
+/* 3. NAVIGASI TAB CARD (UPDATED untuk Logic Tab) */
+.admin-nav-cards {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0 50px 0;
+}
+
+.nav-card {
+  background: linear-gradient(to bottom, #ffffff, #f9f9f9);
+  width: 280px;
+  height: 80px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  /* Update agar terlihat bisa diklik */
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.nav-card span {
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 1rem;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Efek Hover */
+.nav-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* State Aktif (Saat Tab Dipilih) */
+.nav-card.active {
+  border-color: #006837; /* Border hijau */
+  background: #e8f5e9; /* Background agak hijau dikit */
+}
+
+.nav-card.active span {
+  color: #006837; /* Teks jadi hijau */
+}
+
+/* 4. CONTENT WRAPPER (Kartu Putih Besar) */
+.admin-content-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  min-height: 400px;
+}
+
+.content-card {
+  width: 100%;
+}
+
+.card-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+/* 5. TABEL CUSTOM (Sesuai Gambar) */
+
+/* Header Tabel (Abu-abu rounded) */
+.table-header-row {
+  display: flex;
+  background-color: #ccc; /* Abu-abu seperti gambar */
+  border-radius: 20px;
+  padding: 10px 20px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.th-col {
+  flex: 1;
+  font-size: 1rem;
+}
+.th-col.center {
+  text-align: center;
+}
+.th-col.small {
+  flex: 0.3;
+  text-align: center;
+}
+
+/* Body Tabel (Row Card Abu-abu Muda) */
+.table-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.table-row {
+  background-color: #e0e0e0; /* Background row abu muda */
+  background: linear-gradient(to right, #fdfdfd, #e9e9e9);
+  padding: 15px 20px;
+  border-radius: 12px; /* Row rounded */
+  display: flex;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.td-col {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #000;
+  font-weight: 500;
+}
+.td-col.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.td-col.small {
+  flex: 0.3;
+  text-align: center;
+  color: #555;
+}
+.username-text {
+  font-weight: 700;
+}
+
+/* 6. TOMBOL AKSI (Checklist & Cross) */
+.btn-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%; /* Bulat */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.1s;
+}
+
+.btn-icon:active {
+  transform: scale(0.9);
+}
+
+.btn-icon.check {
+  background-color: #66cc33; /* Hijau cerah */
+  box-shadow: 0 2px 5px rgba(102, 204, 51, 0.4);
+}
+.btn-icon.cross {
+  background-color: #ee3333; /* Merah cerah */
+  box-shadow: 0 2px 5px rgba(238, 51, 51, 0.4);
+}
+
+.btn-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 3px; /* Icon tebal */
+}
+
+/* 7. BADGE ROLE (Pill Shape) */
+.role-badge {
+  padding: 5px 20px;
+  border-radius: 20px; /* Bentuk Pill */
+  color: white;
+  font-size: 0.85rem;
+  font-weight: 600;
+  min-width: 100px;
+  text-align: center;
+}
+
+.role-badge.admin {
+  background-color: #ff0000; /* Merah untuk admin */
+}
+.role-badge.contributor {
+  background-color: #4caf50; /* Hijau untuk contributor */
+}
+.role-badge.user {
+  background-color: #ffc107; /* Kuning untuk user */
+  color: white; /* Teks putih agar kontras */
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* 8. DROPDOWN SELECT (Custom Style) */
+.select-wrapper {
+  position: relative;
+}
+
+.role-select {
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #fdfdfd;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+}
+.role-select:focus {
+  border-color: #006837;
+}
+
+.empty-row {
+  text-align: center;
+  padding: 20px;
+  color: #777;
+  font-style: italic;
+}
+
+/* 9. ANIMASI FADE IN (Untuk transisi Tab) */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.upload-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* --- KARTU FORM UPLOAD --- */
+.upload-form-card,
+.history-card {
+  background: white;
+  /* Jika ingin ada border/shadow terpisah di dalam wrapper utama, 
+     tapi karena wrapper utama (.admin-content-wrapper) sudah putih,
+     kita buat elemen ini transparan atau border saja jika perlu.
+     Namun di gambar, terlihat seperti section putih di atas background hijau.
+     Karena struktur kita sudah di dalam card putih besar, kita style elemennya saja.
+  */
+}
+
+/* Input Judul */
+.custom-input {
+  width: 100%;
+  padding: 12px 20px;
+  border: 2px solid #333; /* Border Hitam Tebal sesuai gambar */
+  border-radius: 10px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box; /* Agar padding tidak merusak width */
+}
+
+/* File Input Custom (Chose File) */
+.file-input-group {
+  display: flex;
+  align-items: center;
+  border: 2px solid #333;
+  border-radius: 10px;
+  padding: 5px; /* Sedikit padding agar tombol ada jarak */
+  margin-top: 20px;
+  background-color: white;
+}
+
+.hidden-file-input {
+  display: none; /* Sembunyikan input asli */
+}
+
+.file-label-btn {
+  background-color: #d1d1d1; /* Abu-abu sesuai gambar */
+  color: black;
+  padding: 8px 20px;
+  border: 1px solid #999;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-right: 15px;
+  white-space: nowrap;
+}
+.file-label-btn:hover {
+  background-color: #bbb;
+}
+
+.file-name-display {
+  color: #333;
+  font-size: 1rem;
+  font-style: italic;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Tombol Upload Biru */
+.upload-btn-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.btn-upload-blue {
+  background-color: #004080; /* Biru Gelap sesuai gambar */
+  color: white;
+  border: none;
+  padding: 10px 60px;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s;
+  text-transform: capitalize;
+}
+.btn-upload-blue:hover {
+  background-color: #003366;
+}
+.btn-upload-blue:disabled {
+  background-color: #668caf;
+  cursor: not-allowed;
+}
+
+/* --- KARTU RIWAYAT --- */
+.history-card {
+  margin-top: 20px;
+  border-top: 2px dashed #ccc; /* Pemisah visual opsional */
+  padding-top: 20px;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #d1d1d1; /* Header abu-abu sesuai gambar */
+  padding: 10px 20px;
+  border-radius: 20px; /* Header Pill Shape */
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 15px;
+  text-transform: capitalize;
+}
+
+.history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.history-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.history-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.history-list::-webkit-scrollbar-thumb {
+  background: #888; /* Abu-abu */
+  border-radius: 4px;
+}
+
+/* Warna batang saat di-hover */
+.history-list::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Abu-abu lebih gelap */
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px solid #333; /* Border kotak hitam */
+  border-radius: 12px;
+  padding: 15px 20px;
+  background-color: white;
+}
+
+.history-title {
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.history-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Status Dot (Lingkaran Hijau) */
+.status-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-dot.approved {
+  background-color: #66cc33; /* Hijau cerah */
+  box-shadow: 0 0 5px #66cc33;
+}
+
+.status-dot.pending {
+  background-color: #ffcc00; /* Kuning */
+}
+
+.status-dot.rejected {
+  background-color: #ff3333; /* Merah */
+}
+
+/* TAB Label Styling untuk Upload Journal */
+.upload-tab-label {
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Tombol Mata (Lihat Teks) */
+.btn-view-text {
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 5px 10px;
+  transition: all 0.2s ease;
+}
+
+.btn-view-text:hover {
+  background-color: #f0f0f0;
+  transform: scale(1.1); /* Efek membesar sedikit saat di-hover */
+  border-color: #333;
+}
+
+/* Responsive adjustment jika layar kecil */
+@media (max-width: 768px) {
+  .admin-nav-cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+}
+
+/* ============================================================ */
+/* 🔥 DESIGN BARU: SIDEBAR CHAT_SESSIONS (Tambahkan di Bawah) 🔥 */
+/* ============================================================ */
+
+/* 1. LAYOUT UTAMA: Mengubah arah flex jadi baris (Row) untuk halaman Chat */
+/* Ini penting agar Sidebar ada di Kiri dan Chat Card ada di Kanan */
+.main-chat-layout {
+  flex-direction: row !important;
+  align-items: stretch !important;
+  justify-content: flex-start !important;
+}
+
+/* 2. KONTAINER SIDEBAR (Warna Hijau Tua Gelap - Senada Tema) */
+.chat-sidebar {
+  width: 280px;
+  background-color: #0d331e; /* Hijau Tua Gelap */
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  transition: margin-left 0.3s ease;
+  z-index: 50; /* Di atas animasi daun */
+  box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Logic Buka/Tutup Sidebar */
+.chat-sidebar.closed {
+  margin-left: -280px; /* Sembunyi ke kiri */
+  position: absolute;
+  height: 100%;
+}
+
+.chat-sidebar.open {
+  margin-left: 0;
+  position: relative;
+}
+
+/* 3. TOMBOL NEW CHAT */
+.sidebar-header {
+  margin-bottom: 25px;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-new-chat {
+  width: 100%;
+  background-color: #2e7d32; /* Hijau Medivora */
+  color: white;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btn-new-chat:hover {
+  background-color: #43a047;
+  transform: translateY(-2px);
+}
+
+.btn-toggle-mobile {
+  display: none; /* Hidden di Desktop */
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+  padding: 0 12px;
+  cursor: pointer;
+}
+
+/* 4. LIST RIWAYAT (SESSION LIST) */
+.session-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Custom Scrollbar Tipis untuk Sidebar */
+.session-list::-webkit-scrollbar {
+  width: 5px;
+}
+.session-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.session-label {
+  font-size: 0.75rem;
+  color: #a5d6a7; /* Hijau Pucat */
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+}
+
+/* Item Sesi Individual */
+.session-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #e8f5e9;
+  transition: all 0.2s;
+  border: 1px solid transparent;
+}
+
+.session-item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Sesi yang Sedang Aktif (Highlight) */
+.session-item.active {
+  background-color: rgba(46, 125, 50, 0.3);
+  border-color: #2e7d32;
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.session-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 170px;
+  font-size: 0.9rem;
+}
+
+/* Tombol Hapus Sesi (Tong Sampah Kecil) */
+.btn-del-session {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ef9a9a; /* Merah soft */
+  opacity: 0; /* Default sembunyi */
+  transition: 0.2s;
+  font-size: 1rem;
+}
+
+.session-item:hover .btn-del-session {
+  opacity: 1; /* Muncul saat di-hover */
+}
+
+/* 5. FOOTER SIDEBAR (User Profile) */
+.sidebar-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  background-color: #2e7d32;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: white;
+}
+
+.btn-logout-icon {
+  background: none;
+  border: none;
+  color: #ff5252;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.btn-logout-icon:hover {
+  transform: scale(1.1);
+}
+
+/* 6. AREA UTAMA CHAT (Wadah Kanan) */
+.chat-main-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+/* Penyesuaian agar Chat Card (Design Lama) pas di layout baru */
+.chat-card.full-height {
+  width: 95%;
+  max-width: 1000px;
+  height: 95vh;
+  margin: 0;
+  border-radius: 15px;
+}
+
+/* 7. TOMBOL BUKA SIDEBAR (Muncul jika Sidebar tertutup / Mobile) */
+.btn-open-sidebar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 100;
+  background-color: #0d331e;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 8. RESPONSIVE MOBILE */
+@media (max-width: 768px) {
+  .chat-sidebar {
+    position: absolute;
+    height: 100%;
+    width: 85%;
+    box-shadow: 10px 0 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .btn-toggle-mobile {
+    display: block; /* Munculkan tombol X di mobile */
+  }
+
+  .chat-card.full-height {
+    width: 100%;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
