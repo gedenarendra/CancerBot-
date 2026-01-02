@@ -1,0 +1,71 @@
+/* Style Dasar Tombol */
+.liquid-glass-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+
+  /* Efek Kaca Transparan */
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  cursor: pointer;
+
+  /* Kunci Glassmorphism */
+  backdrop-filter: blur(15px) saturate(130%);
+  -webkit-backdrop-filter: blur(15px) saturate(130%); /* Untuk Safari */
+
+  /* Bayangan Halus */
+  box-shadow: 0 8px 32px 0 rgba(31, 169, 105, 0.5);
+
+  /* Animasi Transisi */
+  transition: all 0.3s ease;
+  overflow: hidden;
+  outline: none;
+}
+
+/* Efek Saat Di-Hover (Mouse Masuk) */
+.liquid-glass-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 40px 0 rgba(31, 169, 105, 0.5);
+  background: rgba(255, 255, 255, 0.2); /* Sedikit lebih terang */
+}
+
+/* Efek Saat Di-Klik (Active) */
+.liquid-glass-btn:active {
+  transform: scale(0.95); /* Efek membal sedikit saat diklik */
+}
+
+/* Elemen Kilau (Shine Effect) */
+.liquid-glass-shine {
+  position: absolute;
+  top: 0;
+  left: -100%; /* Mulai dari luar kiri */
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  transform: skewX(-20deg);
+  transition: 0.5s;
+  pointer-events: none; /* Supaya tidak mengganggu klik */
+}
+
+/* Animasi Kilau Bergerak Saat Hover (Opsional: Membuat kilau lewat) */
+.liquid-glass-btn:hover .liquid-glass-shine {
+  left: 150%; /* Bergerak ke kanan sampai keluar */
+  transition: 0.5s ease-in-out;
+}
+
+/* Wrapper Konten Teks (Supaya di atas shine) */
+.liquid-glass-content {
+  position: relative;
+  z-index: 1;
+}

@@ -1,0 +1,241 @@
+/* 1. AKTIFKAN SCROLL HALUS */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%; /* Gunakan min-height, bukan height fix */
+  overflow-x: hidden;
+  overflow-y: auto; /* Paksa scroll vertikal aktif */
+  background-color: #004e29;
+  scroll-behavior: smooth;
+}
+
+/* 2. CONTAINER UTAMA (Bisa Scroll) */
+.landing-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh; /* Minimal setinggi layar, tapi bisa lebih panjang */
+  overflow-x: hidden; /* Hapus scroll samping */
+  /* overflow: hidden; <-- HAPUS INI AGAR BISA SCROLL KE BAWAH */
+  color: white;
+  background-color: #004e29;
+}
+
+/* 3. NAVBAR (Diam di Atas) */
+.landing-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+}
+
+/* 4. BACKGROUND (Diam di Belakang / Fixed) */
+.landing-bg-layer {
+  position: fixed; /* KUNCI: Ganti absolute jadi fixed */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none; /* Biar klik tembus ke bawah */
+}
+
+/* Overlay Hitam Transparan */
+.landing-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+}
+
+/* 5. HERO SECTION (Halaman Home - Full Layar) */
+/* Saya ganti class .landing-content jadi lebih spesifik untuk hero */
+.landing-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Pastikan ini full 1 layar */
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* Logo */
+.landing-logo {
+  width: 120px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+}
+
+/* Judul Utama */
+.landing-title {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Deskripsi */
+.landing-desc {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin-bottom: 40px;
+  line-height: 1.6;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* --- CREATOR / TEAM SECTION --- */
+.creator-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 50px 20px;
+  text-align: center;
+  z-index: 2;
+  overflow: hidden;
+  background-color: #004e29;
+}
+
+/* 1. CONTAINER UTAMA */
+.creator-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 40px;
+
+  display: block;
+  position: relative;
+
+  /* --- DEFINISI WARNA --- */
+  /* Logic: Warna dominan PUTIH, warna tengah (shimmer) HIJAU */
+  background: linear-gradient(
+    110deg,
+    #ffffff 40%,
+    /* Teks Tetap Putih */ #004e29 50%,
+    /* Shimmer Hijau (#004e29) lewat di tengah */ #ffffff 60%
+      /* Teks Tetap Putih */
+  );
+
+  /* Setup Ukuran agar bisa bergerak */
+  background-size: 200% auto;
+
+  /* Animasi gerakan */
+  animation: shimmer-move 3s linear infinite;
+
+  /* Masking ke Text */
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  /* Transparansi agar background gradient terlihat */
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* 2. HACK KHUSUS REACT (SCROLLFLOAT) - WAJIB ADA */
+/* Memaksa setiap huruf (span) mewarisi gradient induknya */
+.creator-title * {
+  background: inherit !important;
+  background-clip: inherit !important;
+  -webkit-background-clip: inherit !important;
+  color: inherit !important;
+  -webkit-text-fill-color: inherit !important;
+  display: inline-block;
+}
+
+/* 3. KEYFRAMES ANIMASI */
+@keyframes shimmer-move {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+/* Definisi Gerakan */
+
+/* --- GRID YANG DIPERBAIKI --- */
+.creator-grid {
+  display: flex;
+
+  /* 🔥 KUNCI 1: Paksa konten ke tengah horizontal */
+  justify-content: center;
+  align-items: center;
+
+  /* 🔥 KUNCI 2: Hapus gap, kita atur jarak manual pakai margin negatif */
+  gap: 0;
+
+  /* 🔥 KUNCI 3: Agar container memeluk kontennya (shrink wrap) */
+  width: fit-content;
+  margin: 0 auto; /* Center container di tengah layar */
+
+  flex-wrap: wrap;
+  max-width: 100%;
+  padding-bottom: 50px;
+}
+
+/* --- ITEM KARTU --- */
+.creator-card-item {
+  width: auto;
+
+  transform: scale(0.8);
+
+  margin: 0 -20px;
+
+  position: relative;
+  z-index: 10;
+
+  /* Agar kartu yang di-hover naik ke atas */
+  transition: transform 0.3s ease, z-index 0s;
+}
+
+.creator-card-item:hover {
+  transform: scale(0.85); /* Zoom dikit pas hover */
+  z-index: 50; /* Naik paling atas */
+}
+
+/* --- RESPONSIVE --- */
+
+/* Laptop Standard / Tablet (< 1400px) */
+@media (max-width: 1400px) {
+  .creator-grid {
+    width: 90%; /* Kembali ke lebar persen */
+    gap: 20px; /* Pakai gap normal */
+  }
+
+  .creator-card-item {
+    transform: scale(0.9);
+    margin: 0;
+    flex-basis: 40%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+/* HP (< 768px) */
+@media (max-width: 768px) {
+  .creator-card-item {
+    transform: scale(0.9);
+    flex-basis: 100%;
+    margin-bottom: -30px;
+  }
+}
+
+/* Footer */
+.landing-footer {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+  text-align: center;
+  font-size: 0.9rem;
+  background-color: #004e29;
+}

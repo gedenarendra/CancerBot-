@@ -1,0 +1,178 @@
+/* --- WRAPPER KONTAK --- */
+.contact-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 100px 2%; /* Padding diperbesar sedikit biar lega */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+
+  /* Warna solid menyatu dengan section sebelumnya */
+  background-color: #004e29;
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; /* Center vertikal */
+  justify-content: space-between;
+  max-width: 1100px;
+  width: 100%;
+  gap: 60px; /* Jarak antar kolom lebih lega */
+}
+
+/* --- KOLOM KIRI (GAMBAR REVIEW) --- */
+.contact-left {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.image-frame {
+  position: relative;
+  width: 100%;
+  max-width: 500px; /* Ukuran maksimal gambar */
+  border-radius: 20px;
+  overflow: hidden;
+
+  /* Hapus border tebal, ganti dengan shadow elegan */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.image-frame:hover {
+  transform: translateY(-5px); /* Efek naik dikit pas hover */
+}
+
+.image-frame img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+/* --- KOLOM KANAN (KONTEN) --- */
+.contact-right {
+  flex: 1.1;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  /* 🔥 PERUBAHAN UTAMA: Ratakan semua anak elemen ke tengah 🔥 */
+  align-items: center;
+  text-align: center; /* Agar teks (h2, p) rata tengah */
+}
+
+.contact-title {
+  font-size: 3.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.highlight-text {
+  color: #ffffff;
+}
+
+.contact-desc {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  opacity: 0.9;
+  margin-bottom: 50px;
+  font-weight: 400;
+  max-width: 90%;
+}
+
+/* --- SOSIAL MEDIA ICON --- */
+.social-buttons {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 60px;
+
+  /* 🔥 PASTIKAN INI ADA: Agar tombol berada di tengah container 🔥 */
+  justify-content: center;
+  width: 100%;
+}
+
+.social-btn {
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.social-btn img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.social-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.social-btn:hover img {
+  transform: scale(1.1);
+}
+
+/* --- INFO TEXT BAWAH --- */
+.contact-info-text {
+  display: flex;
+  gap: 40px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.85);
+
+  /* 🔥 PASTIKAN INI ADA: Agar teks info juga di tengah 🔥 */
+  justify-content: center;
+  width: 100%;
+}
+
+/* --- RESPONSIVE MOBILE --- */
+@media (max-width: 900px) {
+  .contact-wrapper {
+    padding: 60px 20px;
+  }
+
+  .contact-container {
+    flex-direction: column-reverse; /* Gambar di bawah text (opsional) atau column biasa */
+    flex-direction: column;
+    gap: 50px;
+    text-align: center;
+  }
+
+  .contact-right {
+    align-items: center; /* Center semua konten kanan */
+  }
+
+  .contact-title {
+    font-size: 2.5rem;
+  }
+
+  .contact-desc {
+    font-size: 1.1rem;
+    max-width: 100%;
+  }
+
+  .contact-info-text {
+    flex-direction: column; /* Info numpuk di HP */
+    gap: 10px;
+    justify-content: center;
+  }
+}

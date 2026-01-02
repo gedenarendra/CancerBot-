@@ -14,6 +14,7 @@ body {
   padding: 0;
   /* Background Hijau Gelap satu layar penuh */
   background: radial-gradient(circle at center, #006837 0%, #002e18 100%);
+  /* background: #004e29; */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -49,6 +50,8 @@ body {
 .leaf {
   position: absolute;
   top: -50px; /* Mulai dari atas layar */
+  width: 30px; /* Pastikan ada ukurannya */
+  height: 30px;
   animation: fall linear infinite;
 }
 
@@ -311,7 +314,7 @@ body {
   display: flex;
   align-items: center;
   gap: 15px;
-  height: 80px;
+  height: 100px;
   justify-content: flex-start;
 }
 
@@ -1444,6 +1447,8 @@ body {
   justify-content: center;
   align-items: center;
   z-index: 10;
+  /* background: radial-gradient(circle at center, #006837 0%, #002e18 100%); */
+  /* background: #004e29; */
 }
 
 /* Penyesuaian agar Chat Card (Design Lama) pas di layout baru */

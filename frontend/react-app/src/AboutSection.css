@@ -1,0 +1,283 @@
+/* --- CONTAINER UTAMA --- */
+.about-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 70px;
+  padding-bottom: 80px;
+  padding-left: 5%;
+  padding-right: 5%;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 78, 41, 0.8) 20%,
+    #004e29 100%
+  );
+}
+
+.about-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 1300px;
+  width: 100%;
+  gap: 40px;
+  align-items: center;
+}
+
+/* --- KOLOM KIRI --- */
+.about-left {
+  flex: 1.4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.about-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-shadow: 0 0 20px rgba(163, 255, 172, 0.3);
+  letter-spacing: -1px;
+}
+
+.about-desc {
+  font-size: 1.1rem;
+  margin-bottom: 50px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 90%;
+  text-align: justify;
+}
+
+/* --- GRID KARTU --- */
+.about-cards-grid {
+  display: grid;
+  /* 🔥 UBAH KEMBALI KE 240px agar muat 3 berderet di area yang tersedia */
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 30px;
+  width: 100%;
+}
+
+/* =========================================
+   🔥 FLIP CARD STYLING 🔥
+   ========================================= */
+
+/* 1. Wrapper Luar */
+.flip-card-wrapper {
+  background-color: transparent;
+  width: 100%;
+  /* 🔥 UPDATE: Tinggi dinaikkan jadi 480px agar muat teks panjang */
+  height: 480px;
+  perspective: 1000px;
+}
+
+/* 2. Inner Wrapper */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card-wrapper.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* 3. Sisi Depan & Belakang */
+.flip-card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* --- STYLE KARTU ASLI --- */
+.custom-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.custom-card.full-height {
+  height: 100%;
+  justify-content: space-between;
+}
+
+/* --- KONTEN SISI DEPAN --- */
+.card-image-wrapper {
+  width: 100%;
+  /* 🔥 UPDATE: Tinggi gambar dikurangi (200px -> 180px) untuk hemat tempat */
+  height: 180px;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content-front {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.card-content-front h3 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #a3ffac;
+  margin-bottom: 10px;
+}
+
+/* TOMBOL LIHAT PENJELASAN */
+.btn-flip {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid #a3ffac;
+  color: #a3ffac;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  margin-top: auto;
+}
+
+.btn-flip:hover {
+  background: #a3ffac;
+  color: #004e29;
+  font-weight: bold;
+}
+
+/* --- KONTEN SISI BELAKANG --- */
+.card-content-back {
+  /* 🔥 UPDATE: Padding dikurangi (30px -> 20px) agar area teks luas */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.card-content-back h3 {
+  font-size: 1.3rem;
+  color: #a3ffac;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+  width: 100%;
+}
+
+/* 🔥 UPDATE: DESKRIPSI TANPA SCROLL 🔥 */
+.desc-scroll {
+  /* Font dikecilkan sedikit */
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+
+  margin-bottom: 15px;
+  margin-top: 10px;
+
+  /* Hapus scroll */
+  overflow: hidden;
+  max-height: none;
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* Mulai dari atas */
+  text-align: center;
+}
+
+.link-guide {
+  display: block;
+  margin-top: 10px;
+  color: #ffeb3b;
+  text-decoration: underline;
+  font-size: 0.85rem;
+}
+
+/* TOMBOL KEMBALI */
+.btn-flip-back {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 8px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  /* Margin top otomatis dihandle flex space-between parent */
+}
+
+.btn-flip-back:hover {
+  background: white;
+  color: #004e29;
+}
+
+/* --- KOLOM KANAN (DOKTER) --- */
+.about-right {
+  flex: 0.8;
+  height: 800px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 1200px) {
+  .about-container {
+    flex-direction: column-reverse;
+    gap: 50px;
+    text-align: center;
+  }
+  .about-left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .flip-card-wrapper {
+    height: 420px; /* Di HP bisa sedikit lebih kecil karena 1 kolom */
+  }
+}

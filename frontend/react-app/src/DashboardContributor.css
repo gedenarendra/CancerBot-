@@ -1,0 +1,260 @@
+/* --- GLOBAL RESET --- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #004e29;
+  overflow: hidden; /* Mencegah scroll halaman utama di desktop */
+}
+
+/* LAYOUT UTAMA (FULL SCREEN) */
+.page-layout {
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(circle at 50% 50%, #006837 0%, #00381e 100%);
+  position: relative;
+
+  /* Membuat Content Panel tepat di tengah-tengah layar secara presisi */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- 1. POSISI POJOK KIRI ATAS: LOGO & JUDUL --- */
+.header-top-left {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 20;
+}
+
+.logo-box-inner {
+  width: 120px; /* Lebar ditambah agar teks muat */
+  height: 120px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.logo-content-vertical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+}
+
+.logo-img {
+  width: 55px;
+  height: auto;
+}
+
+.brand-text-inside h2 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #a3ffac; /* Hijau muda */
+  margin: 0;
+  line-height: 1;
+}
+
+.brand-text-inside small {
+  font-size: 0.55rem;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  opacity: 0.9;
+  text-transform: uppercase;
+  display: block;
+  margin-top: 2px;
+}
+
+.page-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #e6e6e6;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* --- 2. TOMBOL LOGOUT POJOK KANAN ATAS --- */
+.btn-logout-top {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  background-color: white;
+  border: none;
+  padding: 8px 25px;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.1s;
+  z-index: 20;
+}
+
+.btn-logout-top:hover {
+  transform: scale(1.05);
+}
+
+/* --- 3. PANEL TENGAH (CONTENT GLASS PANEL) --- */
+.content-glass-panel {
+  width: 100%;
+  max-width: 750px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  padding: 40px 60px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  z-index: 10;
+}
+
+.section-label {
+  text-align: center;
+  color: #c0c0c0;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+.white-box {
+  background: white;
+  border-radius: 15px;
+  padding: 25px 35px;
+  width: 100%;
+}
+
+/* FORM STYLES */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.std-input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+}
+
+.file-input-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: #fff;
+}
+
+.btn-file-select {
+  background: #d1d1d1;
+  color: #333;
+  padding: 6px 20px;
+  border-radius: 15px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid #bbb;
+}
+
+.btn-submit-pill {
+  align-self: center;
+  background-color: #004e29;
+  color: white;
+  border: none;
+  padding: 12px 100px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 63, 138, 0.3);
+  text-transform: lowercase;
+}
+
+/* --- RIWAYAT DENGAN SCROLL (OVERFLOW FIXED) --- */
+.white-box.no-padding {
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.tbl-head {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 35px;
+  background: #fff;
+  border-bottom: 2px solid #eee;
+  font-weight: 700;
+  color: #666;
+  text-transform: lowercase;
+}
+
+.tbl-body {
+  padding: 0;
+  max-height: 180px; /* Batas tinggi agar scroll muncul */
+  overflow-y: auto;
+}
+
+.tbl-body::-webkit-scrollbar {
+  width: 6px;
+}
+.tbl-body::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.tbl-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 35px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.row-text {
+  color: #333;
+  font-weight: 500;
+}
+.row-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+}
+
+.dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+.dot.approved {
+  background: #4caf50;
+}
+.dot.pending {
+  background: #ff9800;
+}
+.dot.rejected {
+  background: #f44336;
+}

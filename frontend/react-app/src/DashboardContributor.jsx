@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import "./App.css";
+import "./DashboardContributor.css";
 const API_DB = import.meta.env.VITE_API_DB;
 
 function DashboardContributor({ userId, handleLogout }) {
+  // --- LOGIC TETAP SAMA (TIDAK BERUBAH) ---
   const [file, setFile] = useState(null);
   const [title, setTitle] = useState("");
   const [myDocs, setMyDocs] = useState([]);
@@ -36,6 +37,8 @@ function DashboardContributor({ userId, handleLogout }) {
       alert("Upload Sukses!");
       setTitle("");
       setFile(null);
+      const fileInput = document.getElementById("file-input");
+      if (fileInput) fileInput.value = "";
       fetchMyDocs();
     } catch (err) {
       alert("Gagal upload");
@@ -43,73 +46,86 @@ function DashboardContributor({ userId, handleLogout }) {
   };
 
   return (
-    <div className="contributor-layout">
-      {/* HEADER */}
-      <header className="contributor-header">
-        <h1>DASHBOARD KONTRIBUTOR</h1>
-        <button onClick={handleLogout} className="btn-logout-white">
-          Log out
-        </button>
-      </header>
+    <div className="page-layout">
+      {/* 1. POSISI POJOK KIRI ATAS: LOGO BOX (TEXT DI DALAM) & JUDUL */}
+      <div className="header-top-left">
+        <div className="logo-box-inner">
+          <div className="logo-content-vertical">
+            <img
+              src="/LogoMedivora.PNG"
+              alt="Medivora Logo"
+              className="logo-img"
+            />
+            <div className="brand-text-inside">
+              <h2>MEDIVORA</h2>
+              <small>KANKER ASISTEN AI</small>
+            </div>
+          </div>
+        </div>
+        <h1 className="page-title">DASHBOARD KONTRIBUTOR</h1>
+      </div>
 
-      <div className="contributor-content">
-        {/* CARD 1: UPLOAD JOURNAL */}
-        <div className="contributor-card">
-          <h3 className="card-heading">Upload Journal</h3>
-          <form onSubmit={handleUpload} className="upload-form-wrapper">
-            {/* Input Judul */}
-            <div className="input-row">
+      {/* 2. TOMBOL LOGOUT POJOK KANAN ATAS */}
+      <button onClick={handleLogout} className="btn-logout-top">
+        Log out
+      </button>
+
+      {/* 3. PANEL TENGAH (FIXED CENTER) */}
+      <div className="content-glass-panel">
+        <div className="section-block">
+          <h3 className="section-label">Upload Journal</h3>
+          <div className="white-box">
+            <form onSubmit={handleUpload} className="upload-form">
               <input
                 type="text"
-                className="contrib-text-input"
-                placeholder="Judul"
+                className="std-input"
+                placeholder="judul"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 required
               />
-            </div>
-
-            {/* Input File */}
-            <div className="input-row">
-              <input
-                type="file"
-                accept="application/pdf"
-                onChange={(e) => setFile(e.target.files[0])}
-                required
-                className="contrib-file-input"
-              />
-            </div>
-
-            {/* Tombol Upload Biru */}
-            <button type="submit" className="btn-upload-blue">
-              Upload
-            </button>
-          </form>
+              <div className="file-input-box">
+                <label htmlFor="file-input" className="btn-file-select">
+                  chose file
+                </label>
+                <span className="file-name-display">
+                  {file ? file.name : ""}
+                </span>
+                <input
+                  id="file-input"
+                  type="file"
+                  accept="application/pdf"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  required
+                  hidden
+                />
+              </div>
+              <div className="btn-wrapper">
+                <button type="submit" className="btn-submit-pill">
+                  upload
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
 
-        {/* CARD 2: RIWAYAT */}
-        <div className="contributor-card">
-          <h3 className="card-heading">Riwayat</h3>
-
-          <div className="history-table-wrapper">
-            {/* Header Tabel (Abu-abu) */}
-            <div className="history-header-row">
-              <div className="h-col left">Judul</div>
-              <div className="h-col right">Status</div>
+        <div className="section-block">
+          <h3 className="section-label">Riwayat</h3>
+          <div className="white-box no-padding">
+            <div className="tbl-head">
+              <span>judul</span>
+              <span>status</span>
             </div>
-
-            {/* Body Tabel */}
-            <div className="history-body">
+            <div className="tbl-body">
               {myDocs.length === 0 ? (
-                <div className="empty-history">Belum ada riwayat upload.</div>
+                <div className="empty-row">Belum ada riwayat.</div>
               ) : (
                 myDocs.map((doc) => (
-                  <div key={doc.id} className="history-row">
-                    <div className="h-col left title-text">{doc.title}</div>
-                    <div className="h-col right status-wrapper">
-                      <span className="status-text">{doc.status}</span>
-                      {/* Indikator Bulat Warna (Hijau/Merah/Kuning) */}
-                      <span className={`status-dot ${doc.status}`}></span>
+                  <div key={doc.id} className="tbl-row">
+                    <span className="row-text">{doc.title}</span>
+                    <div className="row-status">
+                      <span>{doc.status}</span>
+                      <span className={`dot ${doc.status}`}></span>
                     </div>
                   </div>
                 ))
@@ -121,4 +137,5 @@ function DashboardContributor({ userId, handleLogout }) {
     </div>
   );
 }
+
 export default DashboardContributor;
