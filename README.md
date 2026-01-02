@@ -15,7 +15,7 @@
     <a href="#-Tech-Stack-The-Drip">Tech Stack</a> •
     <a href="#-struktur-proyek">Struktur</a> •
     <a href="#-Cara-Start-Gaskeun">Cara Start</a> •
-    <a href="#Rahasia-Dapur-.env">Rahasia Dapur</a>
+    <a href="#-Rahasia-Dapur-.env">Rahasia Dapur</a>
 </p>
 
 </div>
