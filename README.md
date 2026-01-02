@@ -59,9 +59,6 @@ CancerBot/
 ├── frontend/
 │   └── react-app/        # 💅 The FACE (React, Vite, UI Components)
 └── README.md
-Mohon maaf, ini adalah **satu blok kode utuh** yang berisi seluruh konten `README.md` dari awal sampai akhir.
-
-Kamu bisa langsung klik tombol **Copy** di pojok kanan atas kotak kode ini dan paste ke file `README.md` kamu.
 
 ## 🚀 Cara Start (Gaskeun)
 
