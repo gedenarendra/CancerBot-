@@ -147,7 +147,3 @@ Pull Request *open* buat siapa aja yang mau bikin kode ini makin *clean* dan *pe
 Made with 💖 & ☕ by [Narendra]
 
 </div>
-
-```
-
-```
