@@ -11,11 +11,11 @@
 ![Groq](https://img.shields.io/badge/AI-Llama%203-orange?style=for-the-badge)
 
 <p>
-    <a href="#-the-tea-apa-ini">The Tea</a> •
-    <a href="#-tech-stack-drip">Tech Stack</a> •
+    <a href="#-The-Tea-Apa-Ini">The Tea</a> •
+    <a href="#-Tech-Stack-The-Drip">Tech Stack</a> •
     <a href="#-struktur-proyek">Struktur</a> •
-    <a href="#-cara-start-gaskeun">Cara Start</a> •
-    <a href="#-env-secrets">Rahasia Dapur</a>
+    <a href="#-Cara-Start-Gaskeun">Cara Start</a> •
+    <a href="#Rahasia-Dapur-.env">Rahasia Dapur</a>
 </p>
 
 </div>
